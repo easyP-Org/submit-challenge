@@ -1,0 +1,10 @@
+{
+  "name": "submit-challenge",
+  "version": "1.0.0",
+  "description": "Submit completed AI Explorers daily challenges and track your progress.",
+  "author": {
+    "name": "AI Explorers"
+  },
+  "homepage": "https://learners.aiexplorers.co.uk",
+  "keywords": ["ai-explorers", "challenges", "learning"]
+}
