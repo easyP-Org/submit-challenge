@@ -1,0 +1,13 @@
+{
+  "name": "AI Explorers Marketplace",
+  "description": "Plugins for the AI Explorers daily challenge platform.",
+  "plugins": [
+    {
+      "name": "submit-challenge",
+      "description": "Submit completed AI Explorers daily challenges and track your progress.",
+      "version": "1.0.0",
+      "author": "AI Explorers",
+      "url": "https://github.com/easyP-Org/submit-challenge/releases/download/v1.0.0/submit-challenge.plugin"
+    }
+  ]
+}
