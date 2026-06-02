@@ -32,7 +32,7 @@ If the file is missing or either field is empty:
 
 Ask: **"What is the Task ID for this challenge?"**
 
-The admin shares Task IDs from the admin panel (they look like UUIDs, e.g. `3f2c1a...`).
+The admin shares Task IDs from the admin panel (they look like `DD-Mon-NN`, e.g. `31-May-01`).
 
 ---
 
@@ -48,22 +48,32 @@ If the task status is not `Published`, tell the learner this task is no longer a
 
 ---
 
-## Step 4 — Evaluate the attempt in-session
+## Step 4 — Fetch the evaluation rubric
 
-Read the task `description` from the API response.
+Call:
+```
+GET https://ai-explorers-api.onrender.com/skills/rubric
+```
 
-Review the current Claude session — specifically, examine what the learner has done so far in this conversation in relation to the task description.
+This returns the current evaluation rubric as plain text. Use it to guide your assessment in the next step.
 
-Determine whether this constitutes a **genuine attempt**:
-- Did the learner engage meaningfully with the task? (writing code, drafting outputs, exploring the problem)
-- Simply asking Claude to do everything without any personal input does **not** count.
-- A genuine attempt involves the learner directing the work, making decisions, or producing something themselves.
-
-Set `passed` = `true` if genuine, `false` if not.
+If the request fails, fall back to this default: a genuine attempt means the learner engaged meaningfully — they directed the work, made decisions, or produced a concrete output. Simply asking Claude to do everything without personal input does not count. When in doubt, mark as passed.
 
 ---
 
-## Step 5 — Identify the tool
+## Step 5 — Evaluate the attempt in-session
+
+Read the task `description` from Step 3 and the rubric from Step 4.
+
+Review the current Claude session — specifically, examine what the learner has done so far in this conversation in relation to the task description.
+
+Apply the rubric criteria to determine the completion status:
+- **completed** → set `passed` = `true`
+- **attempted** or **unclear** → set `passed` = `false`
+
+---
+
+## Step 6 — Identify the tool
 
 Determine which Claude product was used for this session:
 - If running inside **Claude Code** (CLI): `submitted_with` = `"Claude Code"`
@@ -71,7 +81,7 @@ Determine which Claude product was used for this session:
 
 ---
 
-## Step 6 — POST the submission
+## Step 7 — POST the submission
 
 ```
 POST https://ai-explorers-api.onrender.com/submissions
@@ -91,7 +101,7 @@ Body:
 
 ---
 
-## Step 7 — Display the result
+## Step 8 — Display the result
 
 ### If `passed` is `true`:
 
