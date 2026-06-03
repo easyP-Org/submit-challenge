@@ -1,0 +1,11 @@
+{
+  "name": "submit-challenge",
+  "version": "0.1.0",
+  "description": "AI Explorers challenge submission workflow — validate a Task ID, evaluate locally, and submit results to the leaderboard.",
+  "author": {
+    "name": "AI Explorers"
+  },
+  "homepage": "https://github.com/ankit-residenceessential/ai-explorers-submit-challenge",
+  "repository": "https://github.com/ankit-residenceessential/ai-explorers-submit-challenge",
+  "keywords": ["ai-explorers", "challenge", "submission", "evaluation"]
+}
