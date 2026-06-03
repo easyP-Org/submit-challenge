@@ -1,52 +1,51 @@
-# submit-challenge
+# Submit Challenge Plugin
 
-A Claude Cowork / Claude Code plugin for the **AI Explorers** programme. Guides learners through submitting a completed daily challenge — validating their Task ID, evaluating their work locally, and recording the result on the leaderboard.
+Submit completed [AI Explorers](https://learners.aiexplorers.co.uk) daily challenges and track your progress — directly from Claude Code or Claude CoWork.
 
-## Install from GitHub
+## What it does
 
-In Claude Cowork, open **Plugins → Install from URL** and paste:
-
-```
-https://github.com/ankit-residenceessential/ai-explorers-submit-challenge
-```
-
-Or install manually by downloading the `.plugin` file from the [Releases](https://github.com/ankit-residenceessential/ai-explorers-submit-challenge/releases) page.
+- Saves your learner identity locally so you only enter it once
+- Fetches live task details and evaluation instructions from the AI Explorers API
+- Evaluates your session automatically — no need to re-describe your work
+- Records your submission and shows your certificate link
 
 ## Usage
 
-After completing an AI Explorers task, type:
+At the end of a challenge session, run:
 
 ```
 //submit-challenge
 ```
 
-The skill will:
-1. Fetch live evaluation instructions from the AI Explorers backend
-2. Ask you for your **Task ID**
-3. Validate the Task ID against the server
-4. Ask you to share your work output
-5. Evaluate your submission using the official rubric
-6. Ask for your **name** and **email**
-7. Submit your result to the leaderboard
+You'll be asked for your Task ID (shared by your instructor). Your name and email are saved locally after the first submission so you won't need to enter them again.
+
+## Installation
+
+### Claude CoWork
+
+Open **Plugins → Install from URL** and paste:
+
+```
+https://github.com/easyP-Org/submit-challenge
+```
+
+Or drag the `.plugin` file into the app.
+
+### Claude Code (CLI)
+
+```bash
+claude plugin install https://github.com/easyP-Org/submit-challenge
+```
+
+## Learner identity file
+
+Your email and name are saved to `ai-explorers.json` in your working directory after the first submission. The file is only used to pre-fill your details on subsequent submissions — it is never shared elsewhere.
+
+## Offline mode
+
+If the backend is unreachable, the skill falls back to the evaluation rubric bundled in `skills/submit-challenge/references/evaluation-rubric.md`.
 
 ## Requirements
 
-- Claude Cowork (desktop) or Claude Code (CLI)
-- Internet access to reach `https://aiexplorers-backend.onrender.com`
-- A valid AI Explorers Task ID
-
-## API Endpoints Used
-
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| GET | `/api/instructions` | Fetch live workflow + evaluation criteria |
-| GET | `/api/tasks/{taskId}` | Validate a Task ID |
-| POST | `/api/submissions` | Record final submission |
-
-## Offline Mode
-
-If the backend is unreachable, the skill falls back to the built-in workflow and evaluation rubric bundled in `skills/submit-challenge/references/evaluation-rubric.md`.
-
-## Support
-
-File issues at the [AI Explorers GitHub repository](https://github.com/ankit-residenceessential/ai-explorers-submit-challenge/issues).
+- Internet access to reach `https://ai-explorers-api.onrender.com`
+- A Task ID provided by your AI Explorers instructor

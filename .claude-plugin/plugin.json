@@ -1,11 +1,11 @@
 {
   "name": "submit-challenge",
-  "version": "0.1.0",
-  "description": "AI Explorers challenge submission workflow — validate a Task ID, evaluate locally, and submit results to the leaderboard.",
+  "version": "1.0.0",
+  "description": "Submit completed AI Explorers daily challenges and track your progress.",
   "author": {
     "name": "AI Explorers"
   },
-  "homepage": "https://github.com/ankit-residenceessential/ai-explorers-submit-challenge",
-  "repository": "https://github.com/ankit-residenceessential/ai-explorers-submit-challenge",
-  "keywords": ["ai-explorers", "challenge", "submission", "evaluation"]
+  "homepage": "https://learners.aiexplorers.co.uk",
+  "repository": "https://github.com/easyP-Org/submit-challenge",
+  "keywords": ["ai-explorers", "challenges", "learning", "submission"]
 }

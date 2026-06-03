@@ -1,19 +1,21 @@
 ---
 name: submit-challenge
 description: >
-  AI Explorers challenge submission skill. Triggered when the user says
+  AI Explorers challenge submission skill. Triggered when the learner says
   "//submit-challenge", "submit my challenge", "submit challenge", or
-  "submit my AI Explorers task". Validates the learner's Task ID, evaluates
-  their work from the current conversation, and submits the result to the
-  AI Explorers leaderboard. Do NOT invoke for general questions — only when
-  the user explicitly wants to submit a completed task.
+  "I've finished the task". Fetches live instructions from the API, evaluates
+  the learner's session automatically, and records the result on the leaderboard.
+  Do NOT invoke for general questions — only when the user explicitly wants to
+  submit a completed task.
 tools:
   - WebFetch
+  - Read
+  - Write
 ---
 
 ## //submit-challenge — AI Explorers Submission Workflow
 
-Follow each step in order. Do not skip steps or reorder them.
+Follow each step in order. Do not skip or reorder steps.
 
 ---
 
@@ -22,7 +24,7 @@ Follow each step in order. Do not skip steps or reorder them.
 Before doing anything else, call:
 
 ```
-GET https://aiexplorers-backend.onrender.com/skills/instructions
+GET https://ai-explorers-api.onrender.com/skills/instructions
 ```
 
 Parse the JSON response. It contains:
@@ -30,51 +32,74 @@ Parse the JSON response. It contains:
 - `evaluationCriteria` — rubric to score the learner's work
 - `submissionFields` — exact fields required in the POST payload
 
-**If the fetch fails**, continue using the built-in workflow below and the offline rubric in `references/evaluation-rubric.md`. Inform the user: "Using offline instructions — live instructions unavailable."
+**If the fetch fails**, continue with the built-in workflow below and the offline rubric in `references/evaluation-rubric.md`. Tell the user: "Using offline instructions — live instructions unavailable."
 
 ---
 
-### Step 1 — Ask for Task ID
+### Step 1 — Load Learner Identity
+
+Look for a file called `ai-explorers.json` in the current working directory.
+
+**If the file exists** and contains both `email` and `full_name`, use those values silently — do not ask again.
+
+**If the file is missing or either field is empty**, ask for whatever is missing:
+- Missing `email` → "What is your registered email address?"
+- Missing `full_name` → "What is your full name?"
+
+After collecting the values, write (or update) `ai-explorers.json`:
+
+```json
+{
+  "email": "<email>",
+  "full_name": "<full_name>"
+}
+```
+
+Store as `email` and `fullName`.
+
+---
+
+### Step 2 — Ask for Task ID
 
 Say:
 
-> "Welcome to the AI Explorers challenge submission! Please enter your **Task ID** to get started."
+> "What is the Task ID for this challenge?"
 
-Wait for the user to provide a Task ID (format: `DD-Mon-NN`, e.g. `03-Jun-01`). Accept whatever they type.
+Task IDs look like `DD-Mon-NN` (e.g. `03-Jun-01`). Accept whatever the learner types.
 
 ---
 
-### Step 2 — Validate the Task ID
+### Step 3 — Validate the Task ID
 
 Call:
 
 ```
-GET https://aiexplorers-backend.onrender.com/tasks/{taskId}
+GET https://ai-explorers-api.onrender.com/tasks/{taskId}
 ```
 
 **HTTP 200 — valid task:**
-Store the full response as `taskDetails` (you will use `title`, `description`, `context` in the evaluation step).
+Store the full response as `taskDetails` (you will use `title`, `description`, `context` in Step 4).
 Say: "Task ID validated. Your submission is now being evaluated."
-Proceed to Step 3.
 
 **HTTP 404 or any error:**
 Say: "Task ID is invalid. Please try again."
-Return to Step 1.
+Return to Step 2.
 
 ---
 
-### Step 3 — Evaluate the Work from Conversation Context
+### Step 4 — Evaluate the Work from Conversation Context
 
-The learner has already completed their work before calling this skill. Evaluate what they did by reviewing **the current conversation history** — everything that was discussed and produced in this session before `//submit-challenge` was called.
+The learner has already completed their work before calling this skill.
+Evaluate by reviewing **the current conversation history** — everything discussed and produced in this session before `//submit-challenge` was called.
 
-Do NOT ask the learner to paste or re-describe their work.
+**Do NOT ask the learner to paste or re-describe their work.**
 
-Assess against the task (`taskDetails.description`, `taskDetails.context`) and the rubric below (or from the live instructions):
+Assess against `taskDetails.description` and `taskDetails.context`, using the rubric from Step 0 (or the offline rubric in `references/evaluation-rubric.md`):
 
 | Status | `passed` | When to use |
 |--------|----------|-------------|
 | **completed** | `true` | Genuine effort; real tangible output produced in this session |
-| **attempted** | `false` | Started but incomplete; surface-level only |
+| **attempted** | `false` | Started but incomplete or surface-level only |
 | **unclear** | `false` | Off-topic or too little context to judge |
 
 When in doubt between *completed* and *attempted*, choose *completed*.
@@ -84,30 +109,17 @@ Tell the learner:
 > "Evaluation complete — **[completed / attempted / unclear]**.
 > [2–3 sentences explaining what was strong and what (if anything) was missing.]
 >
-> Collecting your details to record the submission..."
+> Submitting your results now..."
 
 Store the boolean as `passed`.
 
 ---
 
-### Step 4 — Collect Learner Identity
-
-Ask in a single message:
-
-> "Almost done! I just need a couple of details for your submission record:
-> 1. Your **full name**
-> 2. Your **email address**"
-
-Store as `fullName` and `email`.
-
----
-
 ### Step 5 — Detect Tool
 
-Check the environment:
-- If running inside **Claude Code** (CLI), set `submittedWith` = `"Claude Code"`
-- If running inside **Claude CoWork** (desktop), set `submittedWith` = `"Claude CoWork"`
-- If uncertain, ask: "Are you using Claude Code (terminal) or Claude CoWork (desktop app)?"
+- Running in **Claude Code** (CLI) → `submitted_with` = `"Claude Code"`
+- Running in **Claude CoWork** (desktop) → `submitted_with` = `"Claude CoWork"`
+- Uncertain → ask: "Are you using Claude Code (terminal) or Claude CoWork (desktop app)?"
 
 ---
 
@@ -116,16 +128,16 @@ Check the environment:
 Send:
 
 ```
-POST https://aiexplorers-backend.onrender.com/submissions
+POST https://ai-explorers-api.onrender.com/submissions
 Content-Type: application/json
 ```
 
 ```json
 {
-  "task_id": "<taskId from Step 1>",
-  "full_name": "<fullName from Step 4>",
-  "email": "<email from Step 4>",
-  "passed": <boolean from Step 3>,
+  "task_id": "<taskId from Step 2>",
+  "full_name": "<fullName from Step 1>",
+  "email": "<email from Step 1>",
+  "passed": <boolean from Step 4>,
   "submitted_with": "<submittedWith from Step 5>"
 }
 ```
