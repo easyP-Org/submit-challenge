@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ai-explorers",
+  "description": "Plugins for the AI Explorers daily challenge platform.",
+  "owner": {
+    "name": "AI Explorers",
+    "email": "admin@aiexplorers.co.uk"
+  },
+  "plugins": [
+    {
+      "name": "aiexplorers-submit-challenge",
+      "title": "AIExplorers-Submit-Challenge",
+      "description": "Submit completed AI Explorers daily challenges and track your progress. Collects learner identity, evaluates your attempt, and records your submission.",
+      "author": {
+        "name": "AI Explorers"
+      },
+      "category": "productivity",
+      "source": {
+        "source": "github",
+        "repo": "easyP-Org/submit-challenge",
+        "ref": "main"
+      },
+      "homepage": "https://learners.aiexplorers.co.uk"
+    }
+  ]
+}
