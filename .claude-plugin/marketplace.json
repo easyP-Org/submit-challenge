@@ -8,7 +8,7 @@
   },
   "plugins": [
     {
-      "name": "submit-challenge",
+      "name": "AIExplorers-Submit-Challenge",
       "description": "Submit completed AI Explorers daily challenges and track your progress. Collects learner identity, evaluates your attempt, and records your submission.",
       "author": {
         "name": "AI Explorers"
