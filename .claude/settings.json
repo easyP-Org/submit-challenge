@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(https://ai-explorers-api.onrender.com*)"
+      "WebFetch(https://ai-explorers-api.onrender.com*)",
+      "WebFetch(domain:ai-explorers-api.onrender.com)"
     ]
   }
 }
