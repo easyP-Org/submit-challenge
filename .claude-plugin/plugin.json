@@ -1,6 +1,6 @@
 {
-  "name": "submit-challenge",
-  "version": "1.0.0",
+  "name": "aiexplorers-submit-challenge",
+  "version": "1.1.0",
   "description": "Submit completed AI Explorers daily challenges and track your progress.",
   "author": {
     "name": "AI Explorers"
