@@ -1,8 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(https://ai-explorers-api.onrender.com*)",
-      "WebFetch(domain:ai-explorers-api.onrender.com)"
+      "WebFetch(domain:ai-explorers-api.onrender.com)",
+      "Bash(curl -s -X POST https://ai-explorers-api.onrender.com/*)",
+      "Bash(curl -s https://ai-explorers-api.onrender.com/*)",
+      "Bash(git config user.email)",
+      "Bash(git config user.name)"
     ]
   }
 }
