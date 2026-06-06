@@ -2,10 +2,7 @@
   "mcpServers": {
     "ai-explorers": {
       "type": "http",
-      "url": "https://ai-explorers-mcp.onrender.com/mcp",
-      "headers": {
-        "Authorization": "Bearer aie-mcp-2026-secure"
-      }
+      "url": "https://ai-explorers-mcp.onrender.com/mcp"
     }
   }
 }

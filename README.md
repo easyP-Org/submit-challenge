@@ -39,7 +39,7 @@ You'll be asked for your Task ID (shared by your instructor). Your name and emai
 2. Click **Add connector**
 3. Enter the following:
    - **URL:** `https://ai-explorers-mcp.onrender.com/mcp`
-   - **Authentication:** Bearer token → `aie-mcp-2026-secure`
+   - **Authentication:** leave blank (no auth required)
 4. Save
 
 That's it. The connector links your Claude session to the AI Explorers submission system.
