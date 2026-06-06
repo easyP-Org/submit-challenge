@@ -1,7 +1,8 @@
 {
-  "permissions": {
-    "allow": [
-      "WebFetch(domain:ai-explorers-api.onrender.com)"
-    ]
+  "mcpServers": {
+    "ai-explorers": {
+      "type": "http",
+      "url": "https://ai-explorers-mcp.onrender.com/mcp"
+    }
   }
 }
