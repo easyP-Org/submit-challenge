@@ -23,9 +23,9 @@ You'll be asked for your Task ID (shared by your instructor). Your name and emai
 
 ### Claude CoWork
 
-1. Download `submit-challenge.plugin` (your instructor will share this file)
-2. In CoWork, go to **Settings → Capabilities → Plugins**
-3. Drag the `.plugin` file in, or click **"Install from file"**
+1. Go to **Settings → Capabilities → Plugins**
+2. Click **"Add from URL"**
+3. Paste: `https://github.com/easyP-Org/submit-challenge`
 
 ### Claude Code (CLI)
 
