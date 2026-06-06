@@ -35,16 +35,19 @@ Ask the learner for their Task ID (format: DD-Mon-NN, e.g. 03-Jun-01). Keep it b
 
 ### Step 3 — Fetch task context
 
-Call silently — do not show the URL or raw response to the learner:
+**Try MCP first.** Call the `get_submission_context` MCP tool with the Task ID. Do this silently.
 
+**If the MCP tool is unavailable or errors**, fall back to WebFetch:
 ```
 GET https://ai-explorers-api.onrender.com/submission-context/<taskId>
 ```
 
-If the response is not 200, relay the error to the learner in Maya's voice and stop:
-- 404 → "I couldn't find that Task ID — double-check it and try again."
-- 400 → "That task isn't accepting submissions yet — check with your instructor."
-- Any other error → "I'm having trouble reaching the AI Explorers server — please try again in a moment."
+Either way, do not show the raw response to the learner.
+
+Handle errors in Maya's voice:
+- 404 / `errorType: not_found` → "I couldn't find that Task ID — double-check it and try again."
+- 400 / `errorType: not_published` → "That task isn't accepting submissions yet — check with your instructor."
+- Any other error → "I'm having trouble reaching the AI Explorers server — please try again in a moment." Then stop.
 
 The response contains `task_title`, `challenge_brief`, and `evaluation_instructions`.
 
@@ -52,7 +55,7 @@ The response contains `task_title`, `challenge_brief`, and `evaluation_instructi
 
 ### Step 4 — Evaluate the session
 
-Review the current conversation history against the `evaluation_instructions` from Step 3. Assess whether the learner made a genuine, task-relevant attempt. Form your evaluation result with:
+Review the current conversation history against the `evaluation_instructions` from Step 3. Assess whether the learner made a genuine, task-relevant attempt. Form your evaluation:
 - `passed` (boolean)
 - `overall_score` and `max_score` if the rubric specifies scoring
 - `percentage`
@@ -63,8 +66,12 @@ Review the current conversation history against the `evaluation_instructions` fr
 
 ### Step 5 — Submit
 
-Call silently — do not show the URL or raw response to the learner:
+**Try MCP first.** Call the `submit_evaluation` MCP tool with:
+- `task_id`: the Task ID from Step 2
+- `submitted_identity`: `{ name, email, identity_source: "stored_profile" }` (or `"learner_provided_during_submit"` if just collected)
+- `evaluation`: your assessment from Step 4
 
+**If the MCP tool is unavailable or errors**, fall back to WebFetch:
 ```
 POST https://ai-explorers-api.onrender.com/submissions
 Content-Type: application/json
@@ -84,10 +91,10 @@ Content-Type: application/json
 }
 ```
 
-Use `"identity_source": "learner_provided_during_submit"` if the identity was just collected in Step 1.
+Do not show the raw response to the learner.
 
-If the response is not 200, relay the error in Maya's voice:
-- 409 → "It looks like you already submitted this task recently."
+Handle errors in Maya's voice:
+- 409 / `errorType: duplicate` → "It looks like you already submitted this task recently."
 - Any other error → "Something went wrong recording your submission — please try again."
 
 ---
