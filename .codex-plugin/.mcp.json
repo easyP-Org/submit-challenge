@@ -1,0 +1,7 @@
+{
+  "mcp_servers": {
+    "ai-explorers": {
+      "url": "https://ai-explorers-mcp.onrender.com/mcp"
+    }
+  }
+}
