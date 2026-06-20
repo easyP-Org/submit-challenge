@@ -16,8 +16,8 @@
       },
       "category": "productivity",
       "source": {
-        "source": "github",
-        "repo": "easyP-Org/submit-challenge",
+        "source": "git",
+        "url": "https://github.com/easyP-Org/submit-challenge.git",
         "ref": "main"
       },
       "homepage": "https://aiexplorers.co.uk"
