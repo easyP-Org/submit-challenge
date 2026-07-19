@@ -1,6 +1,6 @@
 # Submit Challenge Plugin
 
-Submit completed [AI Explorers](https://aiexplorers.co.uk) daily challenges and track your progress — directly from Claude CoWork or Claude Code.
+Submit completed [AI Explorers](https://aimaxers.com) daily challenges and track your progress — directly from Claude CoWork or Claude Code.
 
 ## What it does
 

@@ -4,7 +4,7 @@
   "description": "Plugins for the AI Explorers daily challenge platform.",
   "owner": {
     "name": "AI Explorers",
-    "email": "admin@aiexplorers.co.uk"
+    "email": "admin@aimaxers.com"
   },
   "plugins": [
     {
@@ -20,7 +20,7 @@
         "repo": "easyP-Org/submit-challenge",
         "ref": "main"
       },
-      "homepage": "https://aiexplorers.co.uk"
+      "homepage": "https://aimaxers.com"
     }
   ]
 }
