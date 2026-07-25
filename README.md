@@ -1,11 +1,11 @@
 # Submit Challenge Plugin
 
-Submit completed [AI Explorers](https://aimaxers.com) daily challenges and track your progress — directly from Claude CoWork or Claude Code.
+Submit completed [AI Maxers](https://aimaxers.com) daily challenges and track your progress — directly from Claude CoWork or Claude Code.
 
 ## What it does
 
 - Saves your learner identity locally so you only enter it once
-- Fetches live task details and evaluation criteria from the AI Explorers API
+- Fetches live task details and evaluation criteria from the AI Maxers API
 - Evaluates your session automatically — no need to re-describe your work
 - Records your submission and shows your certificate link
 
@@ -42,7 +42,7 @@ You'll be asked for your Task ID (shared by your instructor). Your name and emai
    - **Authentication:** leave blank (no auth required)
 4. Save
 
-That's it. The connector links your Claude session to the AI Explorers submission system.
+That's it. The connector links your Claude session to the AI Maxers submission system.
 
 ---
 
@@ -59,4 +59,4 @@ claude plugin install https://github.com/easyP-Org/submit-challenge
 ## Requirements
 
 - Internet access
-- A Task ID provided by your AI Explorers instructor
+- A Task ID provided by your AI Maxers instructor

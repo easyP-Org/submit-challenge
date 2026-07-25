@@ -1,9 +1,9 @@
 {
   "name": "aiexplorers-submit-challenge",
   "version": "1.5.0",
-  "description": "Submit completed AI Explorers daily challenges and track your progress.",
+  "description": "Submit completed AI Maxers daily challenges and track your progress.",
   "author": {
-    "name": "AI Explorers"
+    "name": "AI Maxers"
   },
   "homepage": "https://aimaxers.com",
   "repository": "https://github.com/easyP-Org/submit-challenge",

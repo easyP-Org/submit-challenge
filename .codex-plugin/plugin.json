@@ -1,9 +1,9 @@
 {
   "name": "aiexplorers-submit-challenge",
   "version": "1.5.0",
-  "description": "Submit completed AI Explorers daily challenges and track your progress.",
+  "description": "Submit completed AI Maxers daily challenges and track your progress.",
   "author": {
-    "name": "AI Explorers",
+    "name": "AI Maxers",
     "email": "admin@aimaxers.com",
     "url": "https://aimaxers.com"
   },
@@ -13,10 +13,10 @@
   "skills": "../skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
-    "displayName": "AI Explorers — Submit Challenge",
-    "shortDescription": "Submit your completed AI Explorers daily challenge and track progress.",
-    "longDescription": "Collects your identity, evaluates your attempt against the task rubric, and records your submission with the AI Explorers platform. Results are returned with a certificate URL when you pass.",
-    "developerName": "AI Explorers",
+    "displayName": "AI Maxers — Submit Challenge",
+    "shortDescription": "Submit your completed AI Maxers daily challenge and track progress.",
+    "longDescription": "Collects your identity, evaluates your attempt against the task rubric, and records your submission with the AI Maxers platform. Results are returned with a certificate URL when you pass.",
+    "developerName": "AI Maxers",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],
     "websiteURL": "https://aimaxers.com",
