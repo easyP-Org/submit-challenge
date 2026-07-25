@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "aiexplorers-submit-challenge",
-      "title": "AIMaxers-Submit-Challenge",
+      "title": "AI-Qoach Practice companion",
       "description": "Submit completed AI Maxers daily challenges and track your progress. Collects learner identity, evaluates your attempt, and records your submission.",
       "author": {
         "name": "AI Maxers"

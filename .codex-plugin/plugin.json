@@ -13,7 +13,7 @@
   "skills": "../skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
-    "displayName": "AI Maxers — Submit Challenge",
+    "displayName": "AI-Qoach Practice companion",
     "shortDescription": "Submit your completed AI Maxers daily challenge and track progress.",
     "longDescription": "Collects your identity, evaluates your attempt against the task rubric, and records your submission with the AI Maxers platform. Results are returned with a certificate URL when you pass.",
     "developerName": "AI Maxers",

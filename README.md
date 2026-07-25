@@ -1,4 +1,4 @@
-# Submit Challenge Plugin
+# AI-Qoach Practice companion
 
 Submit completed [AI Maxers](https://aimaxers.com) daily challenges and track your progress — directly from Claude CoWork or Claude Code.
 
