@@ -51,8 +51,11 @@ That's it. The connector links your Claude session to the AI Maxers submission s
 The plugin configures the connection automatically — no extra steps needed.
 
 ```bash
-claude plugin install https://github.com/easyP-Org/submit-challenge
+claude plugin marketplace add easyP-Org/submit-challenge@aimaxers
+claude plugin install aiexplorers-submit-challenge@ai-explorers
 ```
+
+This pins your install to the `aimaxers` branch, which is the current release line. If you'd already registered the marketplace before (e.g. pointing at `main`), remove it first with `claude plugin marketplace remove ai-explorers` so the branch above takes effect.
 
 ---
 
